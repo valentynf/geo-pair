@@ -4,14 +4,24 @@ type GamePropsType = {
   data: { [country: string]: string };
 };
 
+function fisherYatesShuffle(arr: string[]) {
+  return arr.reduce(
+    (res, _, i) => {
+      const randIndex = Math.floor(Math.random() * (i + 1));
+      [res[i], res[randIndex]] = [res[randIndex], res[i]];
+      return res;
+    },
+    [...arr]
+  );
+}
+
 function GeoPairGame({ data }: GamePropsType) {
   const [countries, capitals] = Object.entries(data);
 
-  console.log(countries, capitals);
   return (
     <div id="game">
-      {[...countries, ...capitals].map((name) => (
-        <GeoButton name={name} />
+      {fisherYatesShuffle([...countries, ...capitals]).map((name, index) => (
+        <GeoButton key={index} name={name} />
       ))}
     </div>
   );
