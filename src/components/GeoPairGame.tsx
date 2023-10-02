@@ -5,26 +5,42 @@ type GamePropsType = {
   data: { [country: string]: string };
 };
 
-const shuffleArray = (array: string[]) => {
+export type GeoButtonType = {
+  geoName: string;
+  isActive: boolean;
+  isError: boolean;
+};
+
+const shuffleArray = (array: GeoButtonType[]) => {
   const shCopy = [...array];
   return shCopy.sort(() => Math.random() - 0.5);
 };
 
 function GeoPairGame({ data }: GamePropsType) {
-  const [gameData, setGameData] = useState<string[]>(
-    shuffleArray(Object.entries(data).flat())
+  const [gameData, setGameData] = useState<GeoButtonType[]>(
+    shuffleArray(
+      Object.entries(data)
+        .flat()
+        .map((name) => ({ geoName: name, isActive: false, isError: false }))
+    )
   );
-  const clickedButtonsRef = useRef<string[]>([]);
 
-  function handleButtonClick(buttonName: string) {
+  const clickedButtonsRef = useRef<GeoButtonType[]>([]);
+
+  function handleButtonClick(buttonData: GeoButtonType) {
     if (clickedButtonsRef.current.length < 2)
-      clickedButtonsRef.current = [...clickedButtonsRef.current, buttonName];
+      clickedButtonsRef.current = [...clickedButtonsRef.current, buttonData];
 
     if (clickedButtonsRef.current.length === 2) {
-      const [name1, name2] = clickedButtonsRef.current;
-      if (data[name1] === name2 || data[name2] === name1) {
+      const [btn1, btn2] = clickedButtonsRef.current;
+      if (
+        data[btn1.geoName] === btn2.geoName ||
+        data[btn2.geoName] === btn1.geoName
+      ) {
         setGameData(() =>
-          gameData.filter((el) => el !== name1 && el !== name2)
+          gameData.filter(
+            (el) => el.geoName !== btn1.geoName && el.geoName !== btn2.geoName
+          )
         );
       }
       clickedButtonsRef.current = [];
@@ -33,11 +49,11 @@ function GeoPairGame({ data }: GamePropsType) {
 
   return (
     <div id="game">
-      {gameData.map((name, index) => (
+      {gameData.map((btnData, index) => (
         <GeoButton
-          key={`${index}-${name}`}
-          name={name}
-          onClick={handleButtonClick}
+          key={`${index}-${btnData.geoName}`}
+          data={btnData}
+          onClick={() => handleButtonClick(btnData)}
         />
       ))}
     </div>

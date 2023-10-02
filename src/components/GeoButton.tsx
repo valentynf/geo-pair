@@ -1,23 +1,21 @@
-import { useState } from 'react';
+import { GeoButtonType } from './GeoPairGame';
 
 type GeoButtonPropTypes = {
-  name: string;
-  onClick: (buttonKey: string) => void;
+  data: GeoButtonType;
+  onClick: () => void;
 };
 
-function GeoButton({ name, onClick }: GeoButtonPropTypes) {
-  const [isClicked, setIsClicked] = useState(false);
+function GeoButton({
+  data: { geoName, isActive, isError },
+  onClick,
+}: GeoButtonPropTypes) {
   return (
     <button
-      style={{ backgroundColor: isClicked ? '#4009Bf' : '' }}
-      value={name}
-      onClick={() => {
-        onClick(name);
-        setIsClicked(true);
-      }}
-      disabled={isClicked}
+      style={{ background: isActive ? 'blue' : isError ? 'red' : '' }}
+      value={geoName}
+      onClick={onClick}
     >
-      {name}
+      {geoName}
     </button>
   );
 }
