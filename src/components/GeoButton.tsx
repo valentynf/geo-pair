@@ -1,9 +1,24 @@
+import { useState } from 'react';
+
 type GeoButtonPropTypes = {
   name: string;
+  onClick: (buttonKey: string) => void;
 };
 
-function GeoButton({ name }: GeoButtonPropTypes) {
-  return <button>{name}</button>;
+function GeoButton({ name, onClick }: GeoButtonPropTypes) {
+  const [isClicked, setIsClicked] = useState(false);
+  return (
+    <button
+      style={{ backgroundColor: isClicked ? '#4009Bf' : '' }}
+      value={name}
+      onClick={(e) => {
+        setIsClicked(true);
+        onClick((e.target as HTMLButtonElement).value);
+      }}
+    >
+      {name}
+    </button>
+  );
 }
 
 export default GeoButton;
