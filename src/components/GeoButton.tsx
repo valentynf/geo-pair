@@ -11,8 +11,7 @@ function GeoButton({ name, onClick }: GeoButtonPropTypes) {
     <button
       style={{ backgroundColor: isClicked ? '#4009Bf' : '' }}
       value={name}
-      onClick={(e) => {
-        e.preventDefault();
+      onClick={() => {
         onClick(name);
         setIsClicked(true);
         // onClick((e.target as HTMLButtonElement).value);

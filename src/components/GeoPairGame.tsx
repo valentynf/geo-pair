@@ -11,7 +11,7 @@ const shuffleArray = (array: string[]) => array.sort(() => Math.random() - 0.5);
 function GeoPairGame({ data }: GamePropsType) {
   const [countries, capitals] = Object.entries(data);
 
-  const [countriesData, setCountriesData] = useState<string[]>(
+  const [gameData, setGameData] = useState<string[]>(
     shuffleArray([...countries, ...capitals])
   );
   const clickedButtonsRef = useRef<string[]>([]);
@@ -22,16 +22,17 @@ function GeoPairGame({ data }: GamePropsType) {
     if (clickedButtonsRef.current.length === 2) {
       const [name1, name2] = clickedButtonsRef.current;
       if (data[name1] === name2 || data[name2] === name1) {
-        setCountriesData(() =>
-          countriesData.filter((el) => el !== name1 && el !== name2)
+        setGameData(() =>
+          gameData.filter((el) => el !== name1 && el !== name2)
         );
       }
+      clickedButtonsRef.current = [];
     }
   }
 
   return (
     <div id="game">
-      {countriesData.map((name, index) => (
+      {gameData.map((name, index) => (
         <GeoButton key={index} name={name} onClick={handleButtonClick} />
       ))}
     </div>
