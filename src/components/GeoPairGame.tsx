@@ -5,8 +5,10 @@ type GamePropsType = {
   data: { [country: string]: string };
 };
 
-//since array.length =< 195 (countries) + 195 (capitals), no need for an optimized shuffle algo
-const shuffleArray = (array: string[]) => array.sort(() => Math.random() - 0.5);
+const shuffleArray = (array: string[]) => {
+  const shCopy = [...array];
+  return shCopy.sort(() => Math.random() - 0.5);
+};
 
 function GeoPairGame({ data }: GamePropsType) {
   const [gameData, setGameData] = useState<string[]>(
