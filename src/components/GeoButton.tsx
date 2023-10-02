@@ -14,8 +14,8 @@ function GeoButton({ name, onClick }: GeoButtonPropTypes) {
       onClick={() => {
         onClick(name);
         setIsClicked(true);
-        // onClick((e.target as HTMLButtonElement).value);
       }}
+      disabled={isClicked}
     >
       {name}
     </button>
