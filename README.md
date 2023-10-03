@@ -17,25 +17,25 @@ To get started with GeoPair, follow these steps:
 
 1. Clone the repository to your local machine:
 
-```
+```shell
 git clone https://github.com/valentynf/geo-pair
 ```
 
 2. Navigate to the project directory:
 
-```
+```shell
 cd geo-pair
 ```
 
 3. Install the project dependencies:
 
-```
+```shell
 npm i
 ```
 
 4. Start development server:
 
-```
+```shell
 npm run dev
 ```
 
