@@ -17,19 +17,27 @@ To get started with GeoPair, follow these steps:
 
 1. Clone the repository to your local machine:
 
+```
 git clone https://github.com/valentynf/geo-pair
+```
 
 2. Navigate to the project directory:
 
+```
 cd geo-pair
+```
 
 3. Install the project dependencies:
 
+```
 npm i
+```
 
 4. Start development server:
 
+```
 npm run dev
+```
 
 This will launch the game in your default web browser.
 
