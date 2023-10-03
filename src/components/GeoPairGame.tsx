@@ -28,18 +28,36 @@ function GeoPairGame({ data }: GamePropsType) {
   const clickedButtonsRef = useRef<GeoButtonType[]>([]);
 
   function handleButtonClick(buttonData: GeoButtonType) {
-    if (clickedButtonsRef.current.length < 2)
+    if (clickedButtonsRef.current.length === 0)
+      setGameData((prevData) =>
+        prevData.map((el) => ({ ...el, isActive: false, isError: false }))
+      );
+
+    if (clickedButtonsRef.current.length < 2) {
       clickedButtonsRef.current = [...clickedButtonsRef.current, buttonData];
+      setGameData((prevData) =>
+        prevData.map((el) =>
+          el.geoName === buttonData.geoName ? { ...el, isActive: true } : el
+        )
+      );
+    }
 
     if (clickedButtonsRef.current.length === 2) {
-      const [btn1, btn2] = clickedButtonsRef.current;
-      if (
-        data[btn1.geoName] === btn2.geoName ||
-        data[btn2.geoName] === btn1.geoName
-      ) {
+      const [{ geoName: geoName1 }, { geoName: geoName2 }] =
+        clickedButtonsRef.current;
+
+      if (data[geoName1] === geoName2 || data[geoName2] === geoName1) {
         setGameData(() =>
           gameData.filter(
-            (el) => el.geoName !== btn1.geoName && el.geoName !== btn2.geoName
+            (el) => el.geoName !== geoName1 && el.geoName !== geoName2
+          )
+        );
+      } else {
+        setGameData((prevData) =>
+          prevData.map((el) =>
+            el.geoName === geoName1 || el.geoName === geoName2
+              ? { ...el, isActive: false, isError: true }
+              : el
           )
         );
       }
@@ -49,11 +67,11 @@ function GeoPairGame({ data }: GamePropsType) {
 
   return (
     <div id="game">
-      {gameData.map((btnData, index) => (
+      {gameData.map((buttonData, index) => (
         <GeoButton
-          key={`${index}-${btnData.geoName}`}
-          data={btnData}
-          onClick={() => handleButtonClick(btnData)}
+          key={`${index}-${buttonData.geoName}`}
+          data={buttonData}
+          onClick={() => handleButtonClick(buttonData)}
         />
       ))}
     </div>
