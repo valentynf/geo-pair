@@ -1,9 +1,4 @@
-import { GeoButtonType } from './GeoPairGame';
-
-type GeoButtonPropTypes = {
-  data: GeoButtonType;
-  onClick: () => void;
-};
+import { GeoButtonPropTypes } from '../types/appTypes';
 
 function GeoButton({
   data: { geoName, isActive, isError },

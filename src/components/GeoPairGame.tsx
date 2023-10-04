@@ -1,68 +1,13 @@
-import { useReducer, useRef } from 'react';
+import { useRef } from 'react';
 import GeoButton from './GeoButton';
-
-type GamePropsType = {
-  data: { [country: string]: string };
-};
-
-export type GeoButtonType = {
-  geoName: string;
-  isActive: boolean;
-  isError: boolean;
-};
-
-type reducerActionType = {
-  type: string;
-  payload: GeoButtonType[];
-};
-
-function reducer(state: GeoButtonType[], action: reducerActionType) {
-  switch (action.type) {
-    case 'remove-pair': {
-      const [{ geoName: geoName1 }, { geoName: geoName2 }] = action.payload;
-      return state.filter(
-        (el) => el.geoName !== geoName1 && el.geoName !== geoName2
-      );
-    }
-    case 'reset-buttons-state':
-      return state.map((el) => ({ ...el, isActive: false, isError: false }));
-    case 'set-button-active':
-      return state.map((el) =>
-        el.geoName === action.payload[0].geoName
-          ? { ...el, isActive: true }
-          : el
-      );
-    case 'set-wrong-pair': {
-      const [{ geoName: geoName1 }, { geoName: geoName2 }] = action.payload;
-      return state.map((el) =>
-        el.geoName === geoName1 || el.geoName === geoName2
-          ? { ...el, isActive: false, isError: true }
-          : el
-      );
-    }
-    default:
-      return state;
-  }
-}
-
-const shuffleArray = (array: GeoButtonType[]) => {
-  const shCopy = [...array];
-  return shCopy.sort(() => Math.random() - 0.5);
-};
+import useGameState from '../hooks/useGameState';
+import { GamePropsType, GeoButtonDataType } from '../types/appTypes';
 
 function GeoPairGame({ data }: GamePropsType) {
-  const [gameData, dispatch] = useReducer(
-    reducer,
-    shuffleArray(
-      Object.entries(data)
-        .flat()
-        .map((name) => ({ geoName: name, isActive: false, isError: false }))
-    )
-  );
+  const [gameData, dispatch] = useGameState(data);
+  const clickedButtonsRef = useRef<GeoButtonDataType[]>([]);
 
-  const clickedButtonsRef = useRef<GeoButtonType[]>([]);
-
-  function handleButtonClick(buttonData: GeoButtonType) {
+  function handleButtonClick(buttonData: GeoButtonDataType) {
     if (clickedButtonsRef.current.length === 0)
       dispatch({ type: 'reset-buttons-state', payload: [] });
 
