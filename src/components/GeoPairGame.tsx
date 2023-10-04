@@ -34,13 +34,17 @@ function GeoPairGame({ data }: GamePropsType) {
 
   return (
     <div id="game">
-      {gameData.map((buttonData, index) => (
-        <GeoButton
-          key={`${index}-${buttonData.geoName}`}
-          data={buttonData}
-          onClick={() => handleButtonClick(buttonData)}
-        />
-      ))}
+      {gameData.length > 0 ? (
+        gameData.map((buttonData, index) => (
+          <GeoButton
+            key={`${index}-${buttonData.geoName}`}
+            data={buttonData}
+            onClick={() => handleButtonClick(buttonData)}
+          />
+        ))
+      ) : (
+        <p>Congratulations</p>
+      )}
     </div>
   );
 }
