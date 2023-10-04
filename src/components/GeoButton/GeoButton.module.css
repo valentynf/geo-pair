@@ -1,0 +1,16 @@
+.button {
+  background-color: var(--hunyadi-yellow);
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: var(--carribean-current);
+}
+
+.error {
+  background-color: var(--amaranth-purple);
+}

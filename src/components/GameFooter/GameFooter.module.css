@@ -1,7 +1,5 @@
-/* Footer.module.css */
-
 .footer {
-  background-color: #008080;
+  background-color: var(--light-blue);
   color: white;
   padding: 10px 0;
   text-align: center;

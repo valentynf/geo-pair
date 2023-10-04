@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import GeoButton from './GeoButton';
+import GeoButton from './GeoButton/GeoButton';
 import useGameState from '../hooks/useGameState';
 import { GamePropsType, GeoButtonDataType } from '../types/appTypes';
 
