@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useReducer, useRef } from 'react';
 import GeoButton from './GeoButton';
 
 type GamePropsType = {
@@ -11,13 +11,48 @@ export type GeoButtonType = {
   isError: boolean;
 };
 
+type reducerActionType = {
+  type: string;
+  payload: GeoButtonType[];
+};
+
+function reducer(state: GeoButtonType[], action: reducerActionType) {
+  switch (action.type) {
+    case 'remove-pair': {
+      const [{ geoName: geoName1 }, { geoName: geoName2 }] = action.payload;
+      return state.filter(
+        (el) => el.geoName !== geoName1 && el.geoName !== geoName2
+      );
+    }
+    case 'reset-buttons-state':
+      return state.map((el) => ({ ...el, isActive: false, isError: false }));
+    case 'set-button-active':
+      return state.map((el) =>
+        el.geoName === action.payload[0].geoName
+          ? { ...el, isActive: true }
+          : el
+      );
+    case 'set-wrong-pair': {
+      const [{ geoName: geoName1 }, { geoName: geoName2 }] = action.payload;
+      return state.map((el) =>
+        el.geoName === geoName1 || el.geoName === geoName2
+          ? { ...el, isActive: false, isError: true }
+          : el
+      );
+    }
+    default:
+      return state;
+  }
+}
+
 const shuffleArray = (array: GeoButtonType[]) => {
   const shCopy = [...array];
   return shCopy.sort(() => Math.random() - 0.5);
 };
 
 function GeoPairGame({ data }: GamePropsType) {
-  const [gameData, setGameData] = useState<GeoButtonType[]>(
+  const [gameData, dispatch] = useReducer(
+    reducer,
     shuffleArray(
       Object.entries(data)
         .flat()
@@ -29,17 +64,11 @@ function GeoPairGame({ data }: GamePropsType) {
 
   function handleButtonClick(buttonData: GeoButtonType) {
     if (clickedButtonsRef.current.length === 0)
-      setGameData((prevData) =>
-        prevData.map((el) => ({ ...el, isActive: false, isError: false }))
-      );
+      dispatch({ type: 'reset-buttons-state', payload: [] });
 
     if (clickedButtonsRef.current.length < 2) {
       clickedButtonsRef.current = [...clickedButtonsRef.current, buttonData];
-      setGameData((prevData) =>
-        prevData.map((el) =>
-          el.geoName === buttonData.geoName ? { ...el, isActive: true } : el
-        )
-      );
+      dispatch({ type: 'set-button-active', payload: [buttonData] });
     }
 
     if (clickedButtonsRef.current.length === 2) {
@@ -47,19 +76,12 @@ function GeoPairGame({ data }: GamePropsType) {
         clickedButtonsRef.current;
 
       if (data[geoName1] === geoName2 || data[geoName2] === geoName1) {
-        setGameData(() =>
-          gameData.filter(
-            (el) => el.geoName !== geoName1 && el.geoName !== geoName2
-          )
-        );
+        dispatch({ type: 'remove-pair', payload: clickedButtonsRef.current });
       } else {
-        setGameData((prevData) =>
-          prevData.map((el) =>
-            el.geoName === geoName1 || el.geoName === geoName2
-              ? { ...el, isActive: false, isError: true }
-              : el
-          )
-        );
+        dispatch({
+          type: 'set-wrong-pair',
+          payload: clickedButtonsRef.current,
+        });
       }
       clickedButtonsRef.current = [];
     }
