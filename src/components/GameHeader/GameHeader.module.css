@@ -28,6 +28,7 @@ header {
 
 .leftText,
 .rightText {
+  font-family: 'Cabin';
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;

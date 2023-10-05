@@ -1,9 +1,8 @@
-@import './styles/variables.css';
-
 body {
   background-color: var(--timberwolf);
+  height: auto;
+  margin: 140px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
