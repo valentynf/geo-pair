@@ -14,7 +14,7 @@ function GeoButton({
     .join(' ');
 
   return (
-    <button className={buttonClasses} onClick={onClick}>
+    <button className={buttonClasses} onClick={onClick} disabled={isActive}>
       {geoName}
     </button>
   );

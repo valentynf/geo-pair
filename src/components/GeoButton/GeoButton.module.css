@@ -1,5 +1,6 @@
 .button {
   background-color: var(--fawn);
+  color: white;
   border: 2px solid var(--timberwolf);
   border-radius: 5px;
   padding: 10px 20px;
@@ -19,4 +20,10 @@
   background-color: var(--amaranth-purple);
   color: white;
   border: 2px solid var(--amaranth-purple);
+}
+
+.button:disabled {
+  color: var(--timberwolf);
+  cursor: not-allowed;
+  transform: scale(1);
 }
