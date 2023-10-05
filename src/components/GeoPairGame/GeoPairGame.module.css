@@ -1,13 +1,9 @@
-/* GeoPairGame.module.css */
-
 .game {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  padding: 10px;
   max-width: 900px;
-  margin: 0 auto;
 }
-
-/* Add more styles to GeoPairGame.module.css as needed */

@@ -7,7 +7,6 @@ GeoPair is an interactive web-based game that challenges players to match countr
 ## Features
 
 - Match countries with their capitals to test your geographical knowledge.
-- Enjoy a responsive and user-friendly design for seamless gameplay on various devices.
 - Built with React for a dynamic and interactive user interface.
 - Utilizes TypeScript for static typing and improved code quality.
 - Powered by Vite for fast development and Hot Module Replacement (HMR).

@@ -22,7 +22,6 @@ function reducer(
         ...el,
         isActive: false,
         isWrongPair: false,
-        // isProperPair: false not sure we need this since such buttons are to be removed
       }));
     case 'set-button-active':
       return state.map((el) =>

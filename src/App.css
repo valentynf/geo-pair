@@ -1,7 +1,7 @@
 body {
   background-color: var(--timberwolf);
   height: auto;
-  margin: 140px;
+  margin: 100px 0 0;
   display: flex;
   justify-content: center;
   align-items: center;

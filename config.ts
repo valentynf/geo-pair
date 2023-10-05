@@ -1,4 +1,3 @@
-//List of countries
 export const GAME_DATA = {
   Germany: 'Berlin',
   Azerbaijan: 'Baku',
@@ -30,4 +29,23 @@ export const GAME_DATA = {
   Norway: 'Oslo',
   Denmark: 'Copenhagen',
   Finland: 'Helsinki',
+  Portugal: 'Lisbon',
+  Ireland: 'Dublin',
+  Switzerland: 'Bern',
+  Belgium: 'Brussels',
+  Netherlands: 'Amsterdam',
+  Luxembourg: 'Luxembourg City',
+  Austria: 'Vienna',
+  Czechia: 'Prague',
+  Slovakia: 'Bratislava',
+  Slovenia: 'Ljubljana',
+  Croatia: 'Zagreb',
+  Bosnia: 'Sarajevo',
+  Serbia: 'Belgrade',
+  Montenegro: 'Podgorica',
+  Albania: 'Tirana',
+  Macedonia: 'Skopje',
+  Kosovo: 'Pristina',
+  Romania: 'Bucharest',
+  Bulgaria: 'Sofia',
 };

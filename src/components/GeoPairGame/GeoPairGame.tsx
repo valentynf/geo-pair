@@ -29,26 +29,29 @@ function GeoPairGame({ data }: GamePropsType) {
         clickedButtonsRef.current;
 
       if (data[geoName1] === geoName2 || data[geoName2] === geoName1) {
-        dispatch({
-          type: 'set-proper-pair',
-          payload: clickedButtonsRef.current,
-        });
         setTimeout(() => {
-          // console.log('what am i removing', clickedButtonsRef.current);
+          dispatch({
+            type: 'set-proper-pair',
+            payload: clickedButtonsRef.current,
+          });
+        }, 300);
+        setTimeout(() => {
           dispatch({ type: 'remove-pair', payload: clickedButtonsRef.current });
           clickedButtonsRef.current = [];
-        }, 400);
+        }, 800);
       } else {
-        dispatch({
-          type: 'set-wrong-pair',
-          payload: clickedButtonsRef.current,
-        });
+        setTimeout(() => {
+          dispatch({
+            type: 'set-wrong-pair',
+            payload: clickedButtonsRef.current,
+          });
+        }, 300);
         setTimeout(
           () => dispatch({ type: 'reset-buttons-state', payload: [] }),
-          400
+          700
         );
       }
-      setTimeout(() => (clickedButtonsRef.current = []), 700);
+      setTimeout(() => (clickedButtonsRef.current = []), 850);
     }
   }
 
