@@ -2,4 +2,8 @@
 
 body {
   background-color: var(--timberwolf);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

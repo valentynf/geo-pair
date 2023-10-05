@@ -1,7 +1,8 @@
 import { useRef } from 'react';
-import GeoButton from './GeoButton/GeoButton';
-import useGameState from '../hooks/useGameState';
-import { GamePropsType, GeoButtonDataType } from '../types/appTypes';
+import GeoButton from '../GeoButton/GeoButton';
+import useGameState from '../../hooks/useGameState';
+import { GamePropsType, GeoButtonDataType } from '../../types/appTypes';
+import styles from './GeoPairGame.module.css';
 
 function GeoPairGame({ data }: GamePropsType) {
   const [gameData, dispatch] = useGameState(data);
@@ -33,7 +34,7 @@ function GeoPairGame({ data }: GamePropsType) {
   }
 
   return (
-    <div id="game">
+    <div className={styles.game}>
       {gameData.length > 0 ? (
         gameData.map((buttonData, index) => (
           <GeoButton
