@@ -34,14 +34,19 @@ function GeoPairGame({ data }: GamePropsType) {
         clickedButtonsRef.current;
 
       if (data[geoName1] === geoName2 || data[geoName2] === geoName1) {
-        dispatch({ type: 'remove-pair', payload: clickedButtonsRef.current });
+        dispatch({ type: 'set-button-active', payload: [buttonData] });
+        setTimeout(() => {
+          console.log('what am i removing', clickedButtonsRef.current);
+          dispatch({ type: 'remove-pair', payload: clickedButtonsRef.current });
+          clickedButtonsRef.current = [];
+        }, 1000);
       } else {
         dispatch({
           type: 'set-wrong-pair',
           payload: clickedButtonsRef.current,
         });
       }
-      clickedButtonsRef.current = [];
+      setTimeout(() => (clickedButtonsRef.current = []), 1500);
     }
   }
 
