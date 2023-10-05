@@ -1,14 +1,26 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import GeoButton from '../GeoButton/GeoButton';
 import useGameState from '../../hooks/useGameState';
 import { GamePropsType, GeoButtonDataType } from '../../types/appTypes';
 import styles from './GeoPairGame.module.css';
+import GameFinish from '../GameFinish/GameFinish';
+import GameStart from '../GameStart/GameStart';
 
 function GeoPairGame({ data }: GamePropsType) {
   const [gameData, dispatch] = useGameState(data);
+  const [isGameStarted, setIsGameStarted] = useState<boolean>(false);
   const clickedButtonsRef = useRef<GeoButtonDataType[]>([]);
 
-  function handleButtonClick(buttonData: GeoButtonDataType) {
+  function handleStartGameButtonClick() {
+    setIsGameStarted(true);
+  }
+
+  function handleRestartGameButtonClick() {
+    setIsGameStarted(false);
+    dispatch({ type: 'reset-game', payload: [] });
+  }
+
+  function handleGeoButtonClick(buttonData: GeoButtonDataType) {
     if (clickedButtonsRef.current.length === 0)
       dispatch({ type: 'reset-buttons-state', payload: [] });
 
@@ -35,16 +47,20 @@ function GeoPairGame({ data }: GamePropsType) {
 
   return (
     <div className={styles.game}>
-      {gameData.length > 0 ? (
-        gameData.map((buttonData, index) => (
-          <GeoButton
-            key={`${index}-${buttonData.geoName}`}
-            data={buttonData}
-            onClick={() => handleButtonClick(buttonData)}
-          />
-        ))
+      {isGameStarted ? (
+        gameData.length > 0 ? (
+          gameData.map((buttonData, index) => (
+            <GeoButton
+              key={`${index}-${buttonData.geoName}`}
+              data={buttonData}
+              onClick={() => handleGeoButtonClick(buttonData)}
+            />
+          ))
+        ) : (
+          <GameFinish onClick={handleRestartGameButtonClick} />
+        )
       ) : (
-        <p>Congratulations</p>
+        <GameStart onClick={handleStartGameButtonClick} />
       )}
     </div>
   );

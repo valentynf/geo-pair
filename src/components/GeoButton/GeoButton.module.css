@@ -5,7 +5,7 @@
   padding: 10px 20px;
   margin: 5px;
   font-size: 16px;
-  font-family: 'Cabin';
+  font-family: 'Cabin', sans-serif;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }

@@ -1,5 +1,5 @@
 //List of countries
-export const countriesAndCapitals = {
+export const GAME_DATA = {
   Germany: 'Berlin',
   Azerbaijan: 'Baku',
   France: 'Paris',

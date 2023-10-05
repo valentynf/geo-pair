@@ -4,6 +4,7 @@ import {
   GeoButtonDataType,
   GameStateReducerActionType,
 } from '../types/appTypes';
+import { GAME_DATA } from '../../config';
 
 function reducer(
   state: GeoButtonDataType[],
@@ -32,6 +33,19 @@ function reducer(
           : el
       );
     }
+    case 'reset-game':
+      return shuffleArray(
+        Object.entries(GAME_DATA)
+          .flat()
+          .map(
+            (name) =>
+              ({
+                geoName: name,
+                isActive: false,
+                isError: false,
+              } as GeoButtonDataType)
+          )
+      );
     default:
       return state;
   }

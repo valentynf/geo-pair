@@ -1,0 +1,42 @@
+.start {
+  text-align: center;
+  margin-top: 20px;
+  background-color: var(--tea-rose);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+  text-align: center;
+}
+
+.welcome {
+  background-color: var(--bone);
+  font-family: 'Cabin', sans-serif;
+  font-size: 30px;
+  color: white;
+  text-transform: uppercase;
+  margin: 10px 0;
+}
+
+.description {
+  font-family: 'Cabin', sans-serif;
+  font-size: 18px;
+  color: white;
+  margin: 10px 15px;
+}
+
+.buttonStart {
+  background-color: var(--light-blue);
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  font-family: 'Cabin', sans-serif;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttonStart:hover {
+  background-color: var(--carribean-current);
+}

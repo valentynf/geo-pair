@@ -1,0 +1,42 @@
+.finish {
+  text-align: center;
+  margin-top: 20px;
+  background-color: var(--tea-rose);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 300px;
+  text-align: center;
+}
+
+.congratulations {
+  background-color: var(--bone);
+  font-family: 'Cabin', sans-serif;
+  font-size: 30px;
+  color: white;
+  text-transform: uppercase;
+  margin: 10px 0;
+  padding: 0 20px;
+}
+
+.trophyImage {
+  max-width: 160px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.restart {
+  background-color: var(--light-blue);
+  border: none;
+  padding: 10px 20px;
+  margin: 10px 0;
+  font-family: 'Cabin', sans-serif;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restart:hover {
+  background-color: var(--carribean-current);
+}

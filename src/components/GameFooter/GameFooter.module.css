@@ -10,7 +10,7 @@
 }
 
 .text {
-  font-family: 'Cabin';
+  font-family: 'Cabin', sans-serif;
   font-size: 14px;
   margin: 0;
 }
