@@ -21,32 +21,34 @@ function GeoPairGame({ data }: GamePropsType) {
   }
 
   function handleGeoButtonClick(buttonData: GeoButtonDataType) {
-    if (clickedButtonsRef.current.length === 0)
-      dispatch({ type: 'reset-buttons-state', payload: [] });
-
-    if (clickedButtonsRef.current.length < 2) {
-      clickedButtonsRef.current = [...clickedButtonsRef.current, buttonData];
-      dispatch({ type: 'set-button-active', payload: [buttonData] });
-    }
+    clickedButtonsRef.current = [...clickedButtonsRef.current, buttonData];
+    dispatch({ type: 'set-button-active', payload: [buttonData] });
 
     if (clickedButtonsRef.current.length === 2) {
       const [{ geoName: geoName1 }, { geoName: geoName2 }] =
         clickedButtonsRef.current;
 
       if (data[geoName1] === geoName2 || data[geoName2] === geoName1) {
-        dispatch({ type: 'set-button-active', payload: [buttonData] });
+        dispatch({
+          type: 'set-proper-pair',
+          payload: clickedButtonsRef.current,
+        });
         setTimeout(() => {
-          console.log('what am i removing', clickedButtonsRef.current);
+          // console.log('what am i removing', clickedButtonsRef.current);
           dispatch({ type: 'remove-pair', payload: clickedButtonsRef.current });
           clickedButtonsRef.current = [];
-        }, 1000);
+        }, 400);
       } else {
         dispatch({
           type: 'set-wrong-pair',
           payload: clickedButtonsRef.current,
         });
+        setTimeout(
+          () => dispatch({ type: 'reset-buttons-state', payload: [] }),
+          400
+        );
       }
-      setTimeout(() => (clickedButtonsRef.current = []), 1500);
+      setTimeout(() => (clickedButtonsRef.current = []), 700);
     }
   }
 

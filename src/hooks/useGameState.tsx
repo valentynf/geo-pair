@@ -18,7 +18,12 @@ function reducer(
       );
     }
     case 'reset-buttons-state':
-      return state.map((el) => ({ ...el, isActive: false, isError: false }));
+      return state.map((el) => ({
+        ...el,
+        isActive: false,
+        isWrongPair: false,
+        // isProperPair: false not sure we need this since such buttons are to be removed
+      }));
     case 'set-button-active':
       return state.map((el) =>
         el.geoName === action.payload[0].geoName
@@ -29,7 +34,15 @@ function reducer(
       const [{ geoName: geoName1 }, { geoName: geoName2 }] = action.payload;
       return state.map((el) =>
         el.geoName === geoName1 || el.geoName === geoName2
-          ? { ...el, isActive: false, isError: true }
+          ? { ...el, isActive: false, isWrongPair: true }
+          : el
+      );
+    }
+    case 'set-proper-pair': {
+      const [{ geoName: geoName1 }, { geoName: geoName2 }] = action.payload;
+      return state.map((el) =>
+        el.geoName === geoName1 || el.geoName === geoName2
+          ? { ...el, isActive: false, isProperPair: true }
           : el
       );
     }
@@ -42,7 +55,8 @@ function reducer(
               ({
                 geoName: name,
                 isActive: false,
-                isError: false,
+                isWrongPair: false,
+                isProperPair: false,
               } as GeoButtonDataType)
           )
       );
@@ -57,7 +71,12 @@ function useGameState(data: object) {
     shuffleArray(
       Object.entries(data)
         .flat()
-        .map((name) => ({ geoName: name, isActive: false, isError: false }))
+        .map((name) => ({
+          geoName: name,
+          isActive: false,
+          isWrongPair: false,
+          isProperPair: false,
+        }))
     )
   );
 

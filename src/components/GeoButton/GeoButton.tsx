@@ -2,13 +2,14 @@ import { GeoButtonPropTypes } from '../../types/appTypes';
 import styles from './GeoButton.module.css';
 
 function GeoButton({
-  data: { geoName, isActive, isError },
+  data: { geoName, isActive, isWrongPair, isProperPair },
   onClick,
 }: GeoButtonPropTypes) {
   const buttonClasses = [
     styles.button,
     isActive && styles.active,
-    isError && styles.error,
+    isWrongPair && styles.error,
+    isProperPair && styles.valid,
   ]
     .filter(Boolean)
     .join(' ');

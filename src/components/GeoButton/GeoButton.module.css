@@ -12,18 +12,21 @@
 }
 
 .active {
+  border: 1px solid black;
+  background-color: var(--light-blue);
+  transform: scale(1.01);
+}
+
+.valid {
   background-color: var(--carribean-current);
-  transform: scale(1.05);
 }
 
 .error {
   background-color: var(--amaranth-purple);
   color: white;
-  border: 2px solid var(--amaranth-purple);
 }
 
 .button:disabled {
-  color: var(--timberwolf);
+  color: white;
   cursor: not-allowed;
-  transform: scale(1);
 }

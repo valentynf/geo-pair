@@ -9,7 +9,8 @@ export type GameStateReducerActionType = {
 export type GeoButtonDataType = {
   geoName: string;
   isActive: boolean;
-  isError: boolean;
+  isWrongPair: boolean;
+  isProperPair: boolean;
 };
 
 export type GeoButtonPropTypes = {
